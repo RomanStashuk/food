@@ -44,10 +44,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function getTimeRemaining(endtime) {
     const t = Date.parse(endtime) - Date.parse(new Date());
-    const days = Math.floor(t / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((t / (1000 * 60)) % 60);
-    const seconds = Math.floor((t / 1000) % 60);
+    let days, hours, minutes, seconds;
+
+    if (t <= 0) {
+      days = 0;
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
+    } else {
+      days = Math.floor(t / (1000 * 60 * 60 * 24));
+      hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+      minutes = Math.floor((t / (1000 * 60)) % 60);
+      seconds = Math.floor((t / 1000) % 60);
+    }
 
     return {
       total: t,
@@ -94,3 +103,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   setClock('.timer', deadline);
 });
+
+function showSimpleNum(n) {
+  next: for (let i = 2; i <= n; i++) {
+    for (let j = 2; j < i; j++) {
+      if (i % j === 0) continue next;
+    }
+    console.log(i);
+  }
+}
+
+showSimpleNum(10);
